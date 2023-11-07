@@ -1,0 +1,46 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Trạng thái pressed -->
+<item android:state_pressed="true">
+    <!-- Đặt hình vector hoặc màu sắc cho trạng thái pressed -->
+    <vector
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt"
+        android:width="208dp"
+        android:height="53.26dp"
+        android:viewportWidth="208"
+        android:viewportHeight="53.26"
+        >
+        <group>
+            <clip-path
+                android:pathData="M14 0H194C201.732 0 208 6.26801 208 14V39.2607C208 46.9927 201.732 53.2607 194 53.2607H14C6.26801 53.2607 0 46.9927 0 39.2607V14C0 6.26801 6.26801 0 14 0Z"
+                />
+            <path
+                android:pathData="M0 0V53.2607H208V0"
+                android:fillColor="#81636A"
+                />
+        </group>
+    </vector>
+</item>
+<!-- Trạng thái bình thường -->
+<item>
+    <!-- Đặt hình vector hoặc màu sắc cho trạng thái bình thường -->
+    <vector
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt"
+        android:width="208dp"
+        android:height="53.26dp"
+        android:viewportWidth="208"
+        android:viewportHeight="53.26"
+        >
+        <group>
+            <clip-path
+                android:pathData="M14 0H194C201.732 0 208 6.26801 208 14V39.2607C208 46.9927 201.732 53.2607 194 53.2607H14C6.26801 53.2607 0 46.9927 0 39.2607V14C0 6.26801 6.26801 0 14 0Z"
+                />
+            <path
+                android:pathData="M0 0V53.2607H208V0"
+                android:fillColor="#FA8DA8"
+                />
+        </group>
+    </vector>
+</item>
+</selector>
