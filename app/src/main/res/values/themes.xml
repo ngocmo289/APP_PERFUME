@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.App_perfume" parent="Base.Theme.App_perfume" />
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/pink_nhat</item>
+    </style>
 </resources>

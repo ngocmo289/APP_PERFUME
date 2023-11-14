@@ -2,12 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bgr_signup"/>
+    android:layout_height="match_parent"
+    android:background="@drawable/bgr_signup"
+    android:paddingHorizontal="10dp">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +45,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/edit_text1"
             android:hint=" Your Email"
             android:layout_marginBottom="20dp"
             android:id="@+id/email"
@@ -56,7 +53,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/edit_text1"
             android:hint=" Your Password"
             android:inputType="textPassword"
             android:id="@+id/pass"
@@ -69,7 +66,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/edit_text1"
             android:hint=" Repeat Your Password"
             android:inputType="textPassword"
             android:id="@+id/pass_rp"
@@ -81,7 +78,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"
+            android:background="@drawable/edit_text1"
             android:hint=" Your Name"
             android:layout_marginBottom="20dp"
             android:id="@+id/name_user"
