@@ -1,19 +1,19 @@
 package com.nnmo.app_perfume;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,14 +104,14 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(holder.img.getContext());
 
                 // Gắn layout XML vào BottomSheetDialog
-                View view_update = LayoutInflater.from(holder.img.getContext()).inflate(R.layout.update, null);
+                View view_update = LayoutInflater.from(holder.img.getContext()).inflate(R.layout.update_prd, null);
                 bottomSheetDialog.setContentView(view_update);
 
                 EditText udt_name = view_update.findViewById(R.id.update_name_edt);
                 EditText udt_price = view_update.findViewById(R.id.update_price_edt);
                 EditText udt_sale = view_update.findViewById(R.id.update_sale_edt);
                 EditText udt_des = view_update.findViewById(R.id.update_des_edt);
-                ImageView udt_img = view_update.findViewById(R.id.update_img);
+                ImageButton udt_img = view_update.findViewById(R.id.update_img);
                 CheckBox udt_item_sale = view_update.findViewById(R.id.update_item_sale_cb);
                 Button udt_update = view_update.findViewById(R.id.update_update_btn);
                 Button udt_cancel = view_update.findViewById(R.id.update_cancel_btn);
@@ -136,6 +136,59 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
                         bottomSheetDialog.dismiss();
                     }
                 });
+
+                udt_img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Tạo một AlertDialog.Builder
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
+                        builder.setTitle("Add the URL image");
+
+                        // Inflate layout của dialog
+                        View dialogView = LayoutInflater.from(holder.name.getContext()).inflate(R.layout.custom_dialog_change_img, null);
+                        builder.setView(dialogView);
+
+                        // Lấy reference đến EditText trong layout của dialog
+                        EditText editTextUrl = dialogView.findViewById(R.id.url_img);
+
+                        // Thêm nút Cancel vào dialog
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(holder.name.getContext(), "Cancelled.", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss(); // Đóng dialog khi nhấn Cancel
+                            }
+                        });
+
+                        // Thêm nút Change Image vào dialog
+                        builder.setPositiveButton("Change Image", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Lấy URL từ EditText
+                                String imageUrl = editTextUrl.getText().toString();
+
+                                // Kiểm tra xem URL có hợp lệ không
+                                if (!TextUtils.isEmpty(imageUrl) && URLUtil.isValidUrl(imageUrl)) {
+                                    // Thực hiện các thay đổi cần thiết với URL hình ảnh
+                                    // Ví dụ: Load hình ảnh từ URL vào ImageView
+                                    Glide.with(udt_img.getContext())
+                                            .load(imageUrl)
+                                            .into(udt_img);
+                                } else {
+                                    // Nếu URL trống hoặc không hợp lệ, hiển thị thông báo lỗi
+                                    Toast.makeText(holder.name.getContext(), "Invalid URL", Toast.LENGTH_SHORT).show();
+                                }
+
+                                // Đóng dialog
+                                dialog.dismiss();
+                            }
+                        });
+
+                        // Hiển thị dialog
+                        builder.show();
+                    }
+                });
+
 
                 udt_update.setOnClickListener(new View.OnClickListener() {
 
@@ -164,6 +217,7 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
                         map.put("name", udt_name.getText().toString());
                         map.put("price", Integer.parseInt(udt_price.getText().toString()));
                         map.put("sale", Integer.parseInt(udt_sale.getText().toString()));
+                        map.put("img",udt_img.getContext().toString());
                         map.put("des", udt_des.getText().toString());
                         map.put("item_new", udt_item_new.isChecked());
                         map.put("item_popular", udt_item_popular.isChecked());
@@ -231,7 +285,7 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
     class myViewHolder extends RecyclerView.ViewHolder {
 
         TextView name, price, sale, item_new, item_popular, item_sale;
-        Button btn_edit, btn_add, btn_delete;
+        Button btn_edit, btn_delete;
         ImageView img;
 
 
@@ -246,7 +300,6 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
             item_new = itemView.findViewById(R.id.item_new);
             item_popular = itemView.findViewById(R.id.item_popular);
             item_sale = itemView.findViewById(R.id.item_sale);
-            //btn_add = itemView.findViewById(R.id.btnAdd);
             btn_delete = itemView.findViewById(R.id.btn_delete);
         }
 

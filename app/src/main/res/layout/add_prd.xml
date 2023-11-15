@@ -12,12 +12,18 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginBottom="5dp">
-        <ImageView
+        <FrameLayout
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/update_img"
             android:background="@drawable/frame_img"
-            android:layout_marginRight="100dp"/>
+            android:layout_marginRight="100dp">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/camera"
+                android:layout_gravity="center"
+                android:id="@+id/add_img"/>
+        </FrameLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -38,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:button="@drawable/image_checkbox"
-                    android:id="@+id/update_item_new_cb"/>
+                    android:id="@+id/add_item_new_cb"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:button="@drawable/image_checkbox"
-                    android:id="@+id/update_item_popular_cb"/>
+                    android:id="@+id/add_item_popular_cb"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:button="@drawable/image_checkbox"
-                    android:id="@+id/update_item_sale_cb"/>
+                    android:id="@+id/add_item_sale_cb"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -81,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
-        android:id="@+id/update_name_edt"/>
+        android:id="@+id/add_name_edt"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,7 +97,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="Price"
-            android:id="@+id/update_price_edt"
+            android:id="@+id/add_price_edt"
             android:inputType="number"/>
         <TextView
             android:layout_width="40dp"
@@ -112,7 +118,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="sale"
-            android:id="@+id/update_sale_edt"
+            android:id="@+id/add_sale_edt"
             android:inputType="number"/>
         <TextView
             android:layout_width="40dp"
@@ -128,7 +134,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descript"
-        android:id="@+id/update_des_edt"
+        android:id="@+id/add_des_edt"
         android:layout_marginBottom="30dp"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -136,15 +142,15 @@
         android:orientation="horizontal"
         android:gravity="center">
         <Button
-            android:id="@+id/update_update_btn"
+            android:id="@+id/add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_add"
-            android:text="Update"
+            android:text="Add"
             android:textColor="@color/white"
             android:layout_marginRight="100dp"/>
         <Button
-            android:id="@+id/update_cancel_btn"
+            android:id="@+id/add_cancel_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_add"
