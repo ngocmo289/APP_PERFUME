@@ -40,7 +40,7 @@ public class edit_product extends AppCompatActivity {
     boolean isImageSelected = false;
     FloatingActionButton floatingActionButton;
 
-
+    String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +136,7 @@ public class edit_product extends AppCompatActivity {
                 Button add_btn = view_add.findViewById(R.id.add_btn);
                 Button add_cancel = view_add.findViewById(R.id.add_cancel_btn);
 
+
                 add_img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -165,7 +166,7 @@ public class edit_product extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Lấy URL từ EditText
                                 String imageUrl = editTextUrl.getText().toString();
-
+                                url = imageUrl;
                                 // Kiểm tra xem URL có hợp lệ không
                                 if (!TextUtils.isEmpty(imageUrl) && URLUtil.isValidUrl(imageUrl)) {
                                     // Thực hiện các thay đổi cần thiết với URL hình ảnh
@@ -224,7 +225,7 @@ public class edit_product extends AppCompatActivity {
                         map.put("name", add_name.getText().toString());
                         map.put("price", Integer.parseInt(add_Price.getText().toString()));
                         map.put("sale", Integer.parseInt(add_sale.getText().toString()));
-                        map.put("img",add_img.getContext().toString());
+                        map.put("img",url);
                         map.put("des", add_des.getText().toString());
                         map.put("item_new", add_item_new.isChecked());
                         map.put("item_popular", add_item_popular.isChecked());

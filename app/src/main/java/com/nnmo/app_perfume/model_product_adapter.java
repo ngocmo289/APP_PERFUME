@@ -45,6 +45,7 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
         super(options);
     }
 
+    String url;
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull model_product model) {
 
@@ -70,7 +71,6 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
 
         Glide.with(holder.img.getContext())
                 .load(model.getImg())
-                .apply(new RequestOptions().placeholder(R.drawable.sp2))
                 .into(holder.img);
 
         if (model.getItem_new()) {
@@ -118,12 +118,14 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
                 CheckBox udt_item_new = view_update.findViewById(R.id.update_item_new_cb);
                 CheckBox udt_item_popular = view_update.findViewById(R.id.update_item_popular_cb);
 
+                url = model.getImg();
+
                 udt_name.setText(model.getName());
                 udt_price.setText(model.getPrice().toString());
                 udt_sale.setText(model.getSale().toString());
                 udt_des.setText(model.getDes());
                 Glide.with(udt_img.getContext())
-                        .load(model.getImg())
+                        .load(url)
                         .into(udt_img);
                 udt_item_sale.setChecked(model.getItem_sale());
                 udt_item_popular.setChecked(model.getItem_popular());
@@ -166,6 +168,8 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
                             public void onClick(DialogInterface dialog, int which) {
                                 // Lấy URL từ EditText
                                 String imageUrl = editTextUrl.getText().toString();
+
+                                url = imageUrl;
 
                                 // Kiểm tra xem URL có hợp lệ không
                                 if (!TextUtils.isEmpty(imageUrl) && URLUtil.isValidUrl(imageUrl)) {
@@ -217,7 +221,7 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
                         map.put("name", udt_name.getText().toString());
                         map.put("price", Integer.parseInt(udt_price.getText().toString()));
                         map.put("sale", Integer.parseInt(udt_sale.getText().toString()));
-                        map.put("img",udt_img.getContext().toString());
+                        map.put("img",url);
                         map.put("des", udt_des.getText().toString());
                         map.put("item_new", udt_item_new.isChecked());
                         map.put("item_popular", udt_item_popular.isChecked());

@@ -15,7 +15,6 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/sp1"
             android:layout_gravity="center"
             android:id="@+id/img_sp"/>
         <View
