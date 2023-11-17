@@ -36,7 +36,7 @@ public class edit_product extends AppCompatActivity {
 
 
     RecyclerView rccView;
-    model_product_adapter mainAdapter;
+    manage_model_product_adapter mainAdapter;
     boolean isImageSelected = false;
     FloatingActionButton floatingActionButton;
 
@@ -49,25 +49,12 @@ public class edit_product extends AppCompatActivity {
         EditText edt_search = findViewById(R.id.edt_search);
         TextView tv_edt = findViewById(R.id.tv_edt);
 
-        edt_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
-                // No action needed before text changes
-            }
+        Button btn_back = findViewById(R.id.btn_back_udt);
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                // No action needed when text changes
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // Hide the TextView if there is text in the EditText, otherwise show it
-                if (editable.length() > 0) {
-                    tv_edt.setVisibility(View.GONE);
-                } else {
-                    tv_edt.setVisibility(View.VISIBLE);
-                }
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -83,18 +70,25 @@ public class edit_product extends AppCompatActivity {
                         new FirebaseRecyclerOptions.Builder<model_product>()
                                 .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("name").startAt(s.toString()).endAt(s+"~"), model_product.class)
                                 .build();
-                mainAdapter =new model_product_adapter(options);
+                mainAdapter =new manage_model_product_adapter(options);
                 mainAdapter.startListening();
                 rccView.setAdapter(mainAdapter);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                // Hide the TextView if there is text in the EditText, otherwise show it
+                if (s.length() > 0) {
+                    tv_edt.setVisibility(View.GONE);
+                } else {
+                    tv_edt.setVisibility(View.VISIBLE);
+                }
+
                 FirebaseRecyclerOptions<model_product> options =
                         new FirebaseRecyclerOptions.Builder<model_product>()
                                 .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("name").startAt(s.toString()).endAt(s+"~"), model_product.class)
                                 .build();
-                mainAdapter =new model_product_adapter(options);
+                mainAdapter =new manage_model_product_adapter(options);
                 mainAdapter.startListening();
                 rccView.setAdapter(mainAdapter);
             }
@@ -109,7 +103,7 @@ public class edit_product extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), model_product.class)
                         .build();
 
-        mainAdapter = new model_product_adapter(options);
+        mainAdapter = new manage_model_product_adapter(options);
         rccView.setAdapter(mainAdapter);
 
         floatingActionButton = findViewById(R.id.btnAdd);

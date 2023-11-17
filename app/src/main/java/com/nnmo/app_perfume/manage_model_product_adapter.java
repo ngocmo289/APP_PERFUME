@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,15 +32,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class model_product_adapter extends FirebaseRecyclerAdapter<model_product, model_product_adapter.myViewHolder> {
+public class manage_model_product_adapter extends FirebaseRecyclerAdapter<model_product, manage_model_product_adapter.myViewHolder> {
 
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public model_product_adapter(@NonNull FirebaseRecyclerOptions<model_product> options) {
+    public manage_model_product_adapter(@NonNull FirebaseRecyclerOptions<model_product> options) {
         super(options);
     }
 
@@ -282,7 +275,7 @@ public class model_product_adapter extends FirebaseRecyclerAdapter<model_product
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.udt_list_item_product, parent, false);
         return new myViewHolder(view);
     }
 

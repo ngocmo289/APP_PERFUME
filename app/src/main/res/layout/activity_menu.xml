@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:background="@color/pink_nhat"
         android:id="@+id/bottom_menu"
-        app:menu="@menu/bottom_menu" />
+        app:menu="@menu/bottom_menu_admin" />
 
 
 </LinearLayout>

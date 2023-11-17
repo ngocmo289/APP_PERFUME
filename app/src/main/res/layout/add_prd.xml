@@ -43,7 +43,7 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:button="@drawable/image_checkbox"
+                    android:button="@drawable/udt_image_checkbox"
                     android:id="@+id/add_item_new_cb"/>
             </LinearLayout>
             <LinearLayout
@@ -61,7 +61,7 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:button="@drawable/image_checkbox"
+                    android:button="@drawable/udt_image_checkbox"
                     android:id="@+id/add_item_popular_cb"/>
             </LinearLayout>
             <LinearLayout
@@ -78,7 +78,7 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:button="@drawable/image_checkbox"
+                    android:button="@drawable/udt_image_checkbox"
                     android:id="@+id/add_item_sale_cb"/>
             </LinearLayout>
         </LinearLayout>

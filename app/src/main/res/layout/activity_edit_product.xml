@@ -14,7 +14,7 @@
         android:padding="5dp">
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/btn_back_udt"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/back_icon" />
@@ -23,7 +23,7 @@
             android:id="@+id/edt_search"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_toRightOf="@+id/btn1"
+            android:layout_toRightOf="@+id/btn_back_udt"
             android:gravity="bottom"
             android:hint="Search..."
             app:backgroundTint="@android:color/transparent"

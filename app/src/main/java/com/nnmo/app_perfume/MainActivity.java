@@ -14,14 +14,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_product);
+        setContentView(R.layout.activity_menu);
         // Trong activity hiện tại
-        Intent intent = new Intent(this, edit_product.class);
+        Intent intent = new Intent(this, menu.class);
         startActivity(intent);
 
 //        startLoginActivity();
