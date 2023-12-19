@@ -13,9 +13,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
-public class UserFragment extends Fragment {
-
+public class UserClientFragment extends Fragment {
     Button btn_signout;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -23,7 +21,7 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_client, container, false);
 
         btn_signout = view.findViewById(R.id.btn_signout);
         mAuth = FirebaseAuth.getInstance();

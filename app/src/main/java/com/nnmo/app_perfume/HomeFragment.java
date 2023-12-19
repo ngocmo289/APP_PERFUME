@@ -22,10 +22,11 @@ import android.widget.ScrollView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeFragment extends Fragment {
-
 
     private BottomNavigationView menu_item_prd;
     RecyclerView rccv;
@@ -45,6 +46,15 @@ public class HomeFragment extends Fragment {
         EditText home_edt_search = view.findViewById(R.id.home_edt_search);
         menu_item_prd = view.findViewById(R.id.menu_item);
         rccv = view.findViewById(R.id.rccv_item_prd);
+
+        FirebaseRecyclerOptions<model_product> options = new FirebaseRecyclerOptions.Builder<model_product>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("item_new").equalTo(true), model_product.class)
+                .build();
+
+        mainAdapter = new home_model_product_adapter(options);
+        rccv.setAdapter(mainAdapter);
+        //mainAdapter.startListening();
+
         home_edt_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-        // Trong activity hiện tại
-        Intent intent = new Intent(this, menu.class);
-        startActivity(intent);
+        setContentView(R.layout.nen0);
+//        // Trong activity hiện tại
+//        Intent intent = new Intent(this, menu_client.class);
+//        startActivity(intent);
 
-//        startLoginActivity();
+        startLoginActivity();
 
 
     }
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 5000); // 5 giây (đổi thời gian chờ tại đây)
+        }, 3000); // 3 giây (đổi thời gian chờ tại đây)
     }
 
 

@@ -23,14 +23,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import org.w3c.dom.Text;
 
 public class home_model_product_adapter extends FirebaseRecyclerAdapter<model_product, home_model_product_adapter.myViewHolder> {
 
+    String cost2;
     public home_model_product_adapter(@NonNull FirebaseRecyclerOptions<model_product> options) {
         super(options);
     }
 
     protected void onBindViewHolder(@NonNull home_model_product_adapter.myViewHolder holder, int position, @NonNull model_product model) {
+
 
 
         if (model.getName() != null) {
@@ -47,6 +52,7 @@ public class home_model_product_adapter extends FirebaseRecyclerAdapter<model_pr
                 double saleoff = model.getPrice() * percent;
                 double new_price = model.getPrice() - saleoff;
                 String cost = "$" + new_price;
+                cost2 = cost;
                 // Tạo một SpannableString để giữ cả giá mới và giá cũ
                 SpannableString spannableString = new SpannableString(cost + "   $" + model.getPrice());
 
@@ -60,6 +66,7 @@ public class home_model_product_adapter extends FirebaseRecyclerAdapter<model_pr
                 holder.price.setText(spannableString);
             } else {
                 holder.price.setText("$" + model.getPrice().toString() );
+                cost2 = "$" + model.getPrice().toString();
             }
         } else {
             holder.price.setText("N/A");
@@ -69,7 +76,35 @@ public class home_model_product_adapter extends FirebaseRecyclerAdapter<model_pr
                 .load(model.getImg())
                 .into(holder.img);
 
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo một BottomSheetDialog
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(holder.img.getContext());
+
+                // Gắn layout XML vào BottomSheetDialog
+                View view_detail = LayoutInflater.from(holder.img.getContext()).inflate(R.layout.product_detail, null);
+                bottomSheetDialog.setContentView(view_detail);
+
+                ImageView img_detail = view_detail.findViewById(R.id.detail_img_prd);
+                TextView name_detail =view_detail.findViewById(R.id.detail_name_prd);
+                TextView price_detail =view_detail.findViewById(R.id.detail_price_prd);
+                TextView des_detail =view_detail.findViewById(R.id.detail_des_prd);
+
+                name_detail.setText(model.getName());
+                price_detail.setText(cost2);
+                des_detail.setText(model.getDes());
+
+                Glide.with(img_detail.getContext())
+                        .load(model.getImg())
+                        .into(img_detail);
+
+                // Hiển thị BottomSheetDialog
+                bottomSheetDialog.show();
+            }
+        });
     }
+
 
 
     public home_model_product_adapter.myViewHolder onCreateViewHolder (@NonNull ViewGroup parent,int viewType){

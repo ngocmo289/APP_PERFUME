@@ -17,7 +17,7 @@
             android:layout_height="100dp"
             android:background="@drawable/frame_img"
             android:layout_marginRight="100dp">
-            <ImageButton
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/camera"

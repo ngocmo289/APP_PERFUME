@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -119,7 +120,7 @@ public class edit_product extends AppCompatActivity {
                 View view_add = LayoutInflater.from(edit_product.this).inflate(R.layout.add_prd, null);
                 bottomSheetDialog.setContentView(view_add);
 
-                ImageButton add_img = view_add.findViewById(R.id.add_img);
+                ImageView add_img = view_add.findViewById(R.id.add_img);
                 EditText add_name = view_add.findViewById(R.id.add_name_edt);
                 EditText add_Price = view_add.findViewById(R.id.add_price_edt);
                 EditText add_sale = view_add.findViewById(R.id.add_sale_edt);

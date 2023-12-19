@@ -104,7 +104,7 @@ public class manage_model_product_adapter extends FirebaseRecyclerAdapter<model_
                 EditText udt_price = view_update.findViewById(R.id.update_price_edt);
                 EditText udt_sale = view_update.findViewById(R.id.update_sale_edt);
                 EditText udt_des = view_update.findViewById(R.id.update_des_edt);
-                ImageButton udt_img = view_update.findViewById(R.id.update_img);
+                ImageView udt_img = view_update.findViewById(R.id.update_img);
                 CheckBox udt_item_sale = view_update.findViewById(R.id.update_item_sale_cb);
                 Button udt_update = view_update.findViewById(R.id.update_update_btn);
                 Button udt_cancel = view_update.findViewById(R.id.update_cancel_btn);
