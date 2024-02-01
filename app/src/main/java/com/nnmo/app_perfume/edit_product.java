@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class edit_product extends AppCompatActivity {
 
@@ -215,6 +216,8 @@ public class edit_product extends AppCompatActivity {
                             add_item_sale.setChecked(true);
                         }
 
+                        // Tạo một UUID và gán nó cho thuộc tính id của sản phẩm
+                        String productId = UUID.randomUUID().toString();
 
                         Map<String,Object> map = new HashMap<>();
                         map.put("name", add_name.getText().toString());
@@ -225,6 +228,7 @@ public class edit_product extends AppCompatActivity {
                         map.put("item_new", add_item_new.isChecked());
                         map.put("item_popular", add_item_popular.isChecked());
                         map.put("item_sale", add_item_sale.isChecked());
+                        map.put("id",productId);
 
                         FirebaseDatabase.getInstance().getReference().child("Product").push()
                                 .setValue(map)

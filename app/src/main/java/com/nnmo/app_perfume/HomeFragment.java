@@ -18,13 +18,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeFragment extends Fragment {
 
@@ -32,6 +38,9 @@ public class HomeFragment extends Fragment {
     RecyclerView rccv;
     home_model_product_adapter mainAdapter;
 
+    TextView txt_hello;
+    FirebaseAuth mAuth;
+    FirebaseFirestore mStore;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -54,6 +63,34 @@ public class HomeFragment extends Fragment {
         mainAdapter = new home_model_product_adapter(options);
         rccv.setAdapter(mainAdapter);
         //mainAdapter.startListening();
+
+        txt_hello = view.findViewById(R.id.txt_hello);
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mStore = FirebaseFirestore.getInstance();
+        // Lấy thông tin người dùng hiện tại từ Firebase
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            DocumentReference userDocRef = mStore.collection("Users").document(currentUser.getUid());
+            userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot != null && documentSnapshot.exists()) {
+                            // Lấy giá trị của trường "name" từ tài liệu Firestore
+                            String userName = documentSnapshot.getString("name");
+
+                            // Hiển thị "Xin chào" và tên của người dùng
+                            if (userName != null && !userName.isEmpty()) {
+                                txt_hello.setText("Hello, " + userName + "!");
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
         home_edt_search.addTextChangedListener(new TextWatcher() {
             @Override

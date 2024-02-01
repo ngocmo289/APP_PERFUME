@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nen0);
-//        // Trong activity hiện tại
+        // Trong activity hiện tại
 //        Intent intent = new Intent(this, menu_client.class);
 //        startActivity(intent);
 

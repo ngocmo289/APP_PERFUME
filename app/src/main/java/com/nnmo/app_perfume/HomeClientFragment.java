@@ -2,63 +2,188 @@ package com.nnmo.app_perfume;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeClientFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class HomeClientFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private BottomNavigationView menu_item_prd;
+    RecyclerView rccv;
+    home_model_product_adapter_client mainAdapter;
+    TextView txt_hello;
+    FirebaseAuth mAuth;
+    FirebaseFirestore mStore;
 
     public HomeClientFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeClientFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeClientFragment newInstance(String param1, String param2) {
-        HomeClientFragment fragment = new HomeClientFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_client, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_client, container, false);
+
+        txt_hello = view.findViewById(R.id.txt_hello);
+        EditText home_edt_search = view.findViewById(R.id.home_edt_search);
+        menu_item_prd = view.findViewById(R.id.menu_item);
+        rccv = view.findViewById(R.id.rccv_item_prd);
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mStore = FirebaseFirestore.getInstance();
+        // Lấy thông tin người dùng hiện tại từ Firebase
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            DocumentReference userDocRef = mStore.collection("Users").document(currentUser.getUid());
+            userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot != null && documentSnapshot.exists()) {
+                            // Lấy giá trị của trường "name" từ tài liệu Firestore
+                            String userName = documentSnapshot.getString("name");
+
+                            // Hiển thị "Xin chào" và tên của người dùng
+                            if (userName != null && !userName.isEmpty()) {
+                                txt_hello.setText("Hello, " + userName + "!");
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        FirebaseRecyclerOptions<model_product> options = new FirebaseRecyclerOptions.Builder<model_product>()
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("item_new").equalTo(true), model_product.class)
+                .build();
+
+        mainAdapter = new home_model_product_adapter_client(options,requireContext());
+        rccv.setAdapter(mainAdapter);
+        //mainAdapter.startListening();
+
+        home_edt_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                FirebaseRecyclerOptions<model_product> options =
+                        new FirebaseRecyclerOptions.Builder<model_product>()
+                                .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("name").startAt(s.toString()).endAt(s+"~"), model_product.class)
+                                .build();
+                mainAdapter =new home_model_product_adapter_client(options,requireContext());
+                mainAdapter.startListening();
+                rccv.setAdapter(mainAdapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                FirebaseRecyclerOptions<model_product> options =
+                        new FirebaseRecyclerOptions.Builder<model_product>()
+                                .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("name").startAt(s.toString()).endAt(s+"~"), model_product.class)
+                                .build();
+                mainAdapter =new home_model_product_adapter_client(options,requireContext());
+                mainAdapter.startListening();
+                rccv.setAdapter(mainAdapter);
+            }
+        });
+
+
+// Thay đổi từ LinearLayoutManager sang GridLayoutManager
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        rccv.setLayoutManager(layoutManager);
+
+        menu_item_prd.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemID = item.getItemId();
+                if(itemID == R.id.menu_item_new){
+                    FirebaseRecyclerOptions<model_product> options = new FirebaseRecyclerOptions.Builder<model_product>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("item_new").equalTo(true), model_product.class)
+                            .build();
+
+                    mainAdapter = new home_model_product_adapter_client(options,requireContext());
+                    rccv.setAdapter(mainAdapter);
+                    mainAdapter.startListening();
+                    return true;
+                }
+
+                if(itemID == R.id.menu_item_popular){
+                    FirebaseRecyclerOptions<model_product> options = new FirebaseRecyclerOptions.Builder<model_product>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("item_popular").equalTo(true), model_product.class)
+                            .build();
+
+                    mainAdapter = new home_model_product_adapter_client(options,requireContext());
+                    rccv.setAdapter(mainAdapter);
+                    mainAdapter.startListening();
+                    return true;
+                }
+                if(itemID == R.id.menu_item_sale){
+                    FirebaseRecyclerOptions<model_product> options = new FirebaseRecyclerOptions.Builder<model_product>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("item_sale").equalTo(true), model_product.class)
+                            .build();
+
+                    mainAdapter = new home_model_product_adapter_client(options,requireContext());
+                    rccv.setAdapter(mainAdapter);
+                    mainAdapter.startListening();
+                    return true;
+                }
+                if(itemID == R.id.menu_item_all){
+                    FirebaseRecyclerOptions<model_product> options = new FirebaseRecyclerOptions.Builder<model_product>()
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), model_product.class)
+                            .build();
+
+                    mainAdapter = new home_model_product_adapter_client(options,requireContext());
+                    rccv.setAdapter(mainAdapter);
+                    mainAdapter.startListening();
+                    return true;
+                }
+                return false;
+            }
+        });
+        return view;
+    }
+    public void onStart() {
+        super.onStart();
+        if (mainAdapter != null) {
+            mainAdapter.startListening();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mainAdapter != null) {
+            mainAdapter.stopListening();
+        }
     }
 }

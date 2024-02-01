@@ -125,20 +125,14 @@ public class register extends AppCompatActivity {
 
                                     DocumentReference df = mStore.collection("Users").document(user.getUid());
 
-                                    // Tạo một collection "Favorites" trong document của người dùng
-                                    CollectionReference favoritesCollection = df.collection("Favorites");
-
-
                                     Map<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("name", name1);
                                     userInfo.put("email", email1);
                                     //admin/client
                                     userInfo.put("isClient","1");
                                     df.set(userInfo);
-
-                                    // Thêm sản phẩm vào danh sách yêu thích
-                                    addProductToFavorite(favoritesCollection, "huy.com");
-                                    addProductToFavorite(favoritesCollection, "mer.com");
+                                    // Thêm collection "Favorites" nếu chưa tồn tại
+                                    mStore.collection("Users").document(user.getUid()).collection("Favorites").document("dummyDoc").set(new HashMap<>());
 
                                     Intent intent = new Intent(getApplicationContext(), menu_client.class);
                                     startActivity(intent);

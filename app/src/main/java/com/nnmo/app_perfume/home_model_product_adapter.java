@@ -92,7 +92,14 @@ public class home_model_product_adapter extends FirebaseRecyclerAdapter<model_pr
                 TextView des_detail =view_detail.findViewById(R.id.detail_des_prd);
 
                 name_detail.setText(model.getName());
-                price_detail.setText(cost2);
+                if(! model.getSale().toString().equals("0")){
+                    double new_price = model.getPrice() - (model.getPrice() * (((double)model.getSale())/100));;
+                    String cost = "$" + new_price;
+                    price_detail.setText(cost);
+                }
+                else{
+                    price_detail.setText("$"+model.getPrice().toString());
+                }
                 des_detail.setText(model.getDes());
 
                 Glide.with(img_detail.getContext())

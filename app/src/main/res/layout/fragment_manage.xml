@@ -13,6 +13,13 @@
         android:background="@drawable/edit_text2"
         android:padding="5dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mor_perfume"
+            android:layout_centerVertical="true"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +101,10 @@
         <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/order" />
 
         <TextView
@@ -113,40 +123,8 @@
         android:layout_gravity="center"
         android:background="#686868" />
 
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp">
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/edit_notify"
-            android:background="@null" />
 
-        <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/notify" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="8dp"
-            android:text="Edit Notify"
-            android:textColor="@color/black"
-            android:textSize="25dp" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:background="#686868" />
 
 
 </LinearLayout>

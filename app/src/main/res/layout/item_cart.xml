@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/rectangle_prd"
+    android:orientation="horizontal"
+    android:paddingHorizontal="20dp">
+
+    <ImageView
+        android:id="@+id/img_sp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center" />
+
+    <View
+        android:layout_width="3dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@color/pink_nhat" />
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:id="@+id/name_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Boss Perfume"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price: 1000$"
+            android:textColor="#FF0000"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_gravity="start">
+            <Button
+                android:id="@+id/tru_count"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:text="-"
+                android:background="@drawable/vieenf"/>
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:background="@drawable/vieenf"/>
+            <Button
+                android:id="@+id/cong_cout"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:text="+"
+                android:background="@drawable/vieenf"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/btn_delete"
+        android:background="@drawable/delete"/>
+</LinearLayout>

@@ -154,6 +154,7 @@ public class login extends AppCompatActivity {
                         }
                         passwordVisible = !passwordVisible;
                         return true;
+
                     }
                 }
                 return false;

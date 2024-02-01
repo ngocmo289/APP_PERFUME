@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 public class ManageFragment extends Fragment {
 
-    Button btn_product, btn_order, btn_notify;
+    Button btn_product, btn_order;
 
     public ManageFragment() {
         // Required empty public constructor
@@ -26,7 +26,6 @@ public class ManageFragment extends Fragment {
         // Find views by ID
         btn_product = view.findViewById(R.id.edit_product);
         btn_order = view.findViewById(R.id.check_order);
-        btn_notify = view.findViewById(R.id.edit_notify);
 
         btn_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,13 +41,6 @@ public class ManageFragment extends Fragment {
             }
         });
 
-        btn_notify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openedit_notify();
-            }
-        });
-        // Now you can use btn_manage, btn_order, and btn_notify
         return view;
     }
 
@@ -58,10 +50,7 @@ public class ManageFragment extends Fragment {
     }
 
     private void openedit_order(){
-
-    }
-
-    private void openedit_notify(){
-
+        Intent intent = new Intent(getActivity(),check_order_admin.class);
+        startActivity(intent);
     }
 }

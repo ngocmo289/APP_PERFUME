@@ -55,10 +55,11 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/sp3"/>
                 <TextView
+                    android:id="@+id/txt_hello"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="hello, user"
-                    android:textSize="30dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:textStyle="italic"
                     android:layout_gravity="center_vertical"

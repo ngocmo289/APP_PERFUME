@@ -43,9 +43,15 @@ public class menu_client extends AppCompatActivity {
         });
         replaceFragment(new HomeClientFragment());
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Thực hiện cập nhật thanh menu hoặc các thay đổi khác khi Activity được khôi phục
+    }
+
 
     private void replaceFragment(Fragment fragment) {
-        Log.d("FragmentTransaction", "Replacing fragment: " + fragment.getClass().getSimpleName());
+        //Log.d("FragmentTransaction", "Replacing fragment: " + fragment.getClass().getSimpleName());
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commit();
     }
 }

@@ -4,12 +4,9 @@ public class model_product {
     String name, des, img;
     Integer price, sale;
     Boolean item_new, item_popular, item_sale;
+    String id;
 
-    model_product(){
-
-    }
-
-    public model_product(String name, String des, String img, Integer price, Integer sale, Boolean item_new, Boolean item_popular, Boolean item_sale) {
+    public model_product(String name, String des, String img, Integer price, Integer sale, Boolean item_new, Boolean item_popular, Boolean item_sale, String id) {
         this.name = name;
         this.des = des;
         this.img = img;
@@ -18,6 +15,7 @@ public class model_product {
         this.item_new = item_new;
         this.item_popular = item_popular;
         this.item_sale = item_sale;
+        this.id = id;
     }
 
     public String getName() {
@@ -83,4 +81,18 @@ public class model_product {
     public void setItem_sale(Boolean item_sale) {
         this.item_sale = item_sale;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    model_product(){
+
+    }
+
+
 }
