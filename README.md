@@ -48,8 +48,6 @@ Below are some images of the application &#x1F447;
 
 <img src="https://github.com/ngocmo289/APP_PERFUME/assets/126641462/dfcea74e-bc41-4c14-9a02-2d861fd1bf3d" width="210" height="400">
 
-<img src="https://github.com/ngocmo289/APP_PERFUME/assets/126641462/fef690b5-d56f-4713-b022-3255d9cbf7fc" width="210" height="400">
-
 ### 👮 ADMIN _ MANAGER order 
 
 <img src="https://github.com/ngocmo289/APP_PERFUME/assets/126641462/8c3df0e3-9ea3-4872-aa47-721de6344dff" width="210" height="400">
